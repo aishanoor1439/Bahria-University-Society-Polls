@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUSPs-Register</title>
+    <title>BUSPs-Reset Password</title>
     <!-- Updated Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -68,58 +68,38 @@
                     <div class="card-body p-md-5 mx-md-4">
                         <div class="text-center">
                             <img src="{{ asset('assets/img/Logo.png') }}" style="width: 180px;" alt="logo">
-                            <h4 class="mt-1 mb-5 pb-1">Create your Account</h4>
+                            <h4 class="mt-1 mb-5 pb-1">Reset Password</h4>
                         </div>
 
-                        @if (session('success'))
-                        <div class="alert alert-success">
-                            {{ session('success') }}
-                        </div>
+                        @if (session('status'))
+                            <div class="alert alert-success">
+                                {{ session('status') }}
+                            </div>
                         @endif
 
-                        <form action="{{ route('admin.register.submit') }}" method="POST">
+                        <form method="POST" action="{{ route('admin.password.email') }}">
                             @csrf
 
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form2Example11">Username</label>
-                                <input type="text" id="form2Example11" class="form-control" name="name" placeholder="" />
-                            </div>
-
-                            <div class="form-outline mb-4">
                                 <label class="form-label" for="form2Example22">Email</label>
-                                <input type="email" id="form2Example22" class="form-control" name="email" placeholder="example@gmail.com" />
+                                <input type="email" id="form2Example22" class="form-control" name="email" required/>
                             </div>
 
                             <div class="form-outline mb-4">
-                                <label class="form-label" for="form2Example33">Password</label>
-                                <input type="password" id="form2Example33" class="form-control" name="password" />
+                                <label class="form-label" for="form2Example33">New Password</label>
+                                <input type="password" id="form2Example33" class="form-control" name="password" required/>
+                            </div>
+
+                            <div class="form-outline mb-4">
+                                <label class="form-label" for="form2Example33">Confirm Password</label>
+                                <input type="password" id="form2Example33" class="form-control" name="password_confirmation" required/>
                             </div>
 
                             <div class="text-center pt-1 mb-5 pb-1">
                                 <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 w-100" type="submit">
-                                    Sign up
+                                    Send Password Reset Link
                                 </button>
                             </div>
-
-                            <div class="d-flex align-items-center justify-content-center pb-3">
-                                <p class="mb-0 me-2">Already have an account?</p>
-                            </div>
-
-                            <div class="d-flex align-items-center justify-content-center pb-4">
-                                <a href="{{ route('admin.login') }}" class="btn btn-custom">
-                                    Login
-                                </a>
-                            </div>
-
-                            @if ($errors->any())
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            @endif
                         </form>
                     </div>
                 </div>
@@ -130,13 +110,6 @@
     <!-- Bootstrap Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Toastr for error messages (if needed) -->
-    @if(session('error'))
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script>
-        toastr.error("{{ session('error') }}");
-    </script>
-    @endif
 </body>
 
 </html>

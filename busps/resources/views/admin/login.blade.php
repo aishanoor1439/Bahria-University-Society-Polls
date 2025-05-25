@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bootstrap Site</title>
+    <title>BUSPs-Login</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" integrity="sha384-r4NyP46KrjDleawBgD5tp8Y7UzmLA05oM1iAEQ17CSuDqnUK2+k9luXQOfXJCJ4I" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
@@ -14,10 +14,22 @@
             background: #fccb90;
 
             /* Chrome 10-25, Safari 5.1-6 */
-            background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+            background: -webkit-linear-gradient(to right, #2d1d61, #c4a461, #c4a461, #2d1d61);
 
             /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+            background: linear-gradient(to right, #2d1d61, #2d1d61, #2d1d61, #2d1d61);
+        }
+
+        .btn-custom {
+            color: #2d1d61;
+            border-color: #2d1d61;
+
+        }
+
+        .btn-custom:hover {
+            background-color: #c5e3f4;
+            color: #2d1d61 !important;
+            border-color: #2d1d61;
         }
 
         @media (min-width: 768px) {
@@ -32,68 +44,95 @@
                 border-bottom-right-radius: .3rem;
             }
         }
+
+        /* Added styles for centering */
+        .center-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 500px;
+            /* Adjust this value as needed */
+        }
     </style>
 </head>
 
 <body>
-    <section class="h-100 gradient-form" style="background-color: #eee;">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col-xl-10">
-                    <div class="card rounded-3 text-black">
-                        <div class="row g-0">
-                            <div class="col-lg-6">
-                                <div class="card-body p-md-5 mx-md-4">
-
-                                    <div class="text-center">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
-                                            style="width: 185px;" alt="logo">
-                                        <h4 class="mt-1 mb-5 pb-1">We are The Lotus Team</h4>
-                                    </div>
-
-                                    <form>
-                                        <p>Please login to your account</p>
-
-                                        <div data-mdb-input-init class="form-outline mb-4">
-                                            <input type="email" id="form2Example11" class="form-control"
-                                                placeholder="Phone number or email address" />
-                                            <label class="form-label" for="form2Example11">Username</label>
-                                        </div>
-
-                                        <div data-mdb-input-init class="form-outline mb-4">
-                                            <input type="password" id="form2Example22" class="form-control" />
-                                            <label class="form-label" for="form2Example22">Password</label>
-                                        </div>
-
-                                        <div class="text-center pt-1 mb-5 pb-1">
-                                            <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="button">Log
-                                                in</button>
-                                            <a class="text-muted" href="#!">Forgot password?</a>
-                                        </div>
-
-                                        <div class="d-flex align-items-center justify-content-center pb-4">
-                                            <p class="mb-0 me-2">Don't have an account?</p>
-                                            <button type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-outline-danger">Create new</button>
-                                        </div>
-
-                                    </form>
-
-                                </div>
-                            </div>
-                            <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-                                <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                    <h4 class="mb-4">We are more than just a company</h4>
-                                    <p class="small mb-0">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                        exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                </div>
-                            </div>
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10 center-form">
+                <div class="card rounded-3 text-black login-card">
+                    <div class="card-body p-md-5 mx-md-4">
+                        <div class="text-center">
+                            <img src="{{ asset('assets/img/Logo.png') }}" style="width: 180px;" alt="logo">
+                            <h4 class="mt-1 mb-5 pb-1">Login to your Account</h4>
                         </div>
+
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+
+                        <form action="{{ route('admin.login.submit') }}" method="POST">
+                            @csrf
+
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form2Example11">Email</label>
+                                <input type="email" id="form2Example11" class="form-control" name="email"
+                                    />
+                            </div>
+
+                            <div data-mdb-input-init class="form-outline mb-4">
+                                <label class="form-label" for="form2Example22">Password</label>
+                                <input type="password" id="form2Example22" class="form-control" name="password" />
+                            </div>
+
+                            <div class="text-center pt-1 mb-5 pb-1">
+                                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Sign in
+                                </button>
+                                <a class="text-muted" href="{{ route('admin.password.request') }}">Forgot password?</a>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-center pb-3">
+                                <p class="mb-0 me-2">Don't have an account?</p>
+                            </div>
+
+                            <div class="d-flex align-items-center justify-content-center pb-4">
+                                <a href="{{ route('admin.register') }}" class="btn btn-custom">
+                                    Register
+                                </a>
+                            </div>
+
+                            @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                            @endif
+
+
+                        </form>
+
+                        <!-- Toastr for error messages (if needed) -->
+                        @if(session('error'))
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+                        <script>
+                            toastr.error("{{ session('error') }}");
+                        </script>
+                        @endif
+
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
 </body>
 
 </html>
