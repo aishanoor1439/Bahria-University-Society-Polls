@@ -5,6 +5,10 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\AdminForgotPasswordController;
 use App\Http\Controllers\Auth\AdminResetPasswordController;
 
+Route::get('/admin/admin-reset', function () {
+    return view('auth/passwords/admin-reset');
+});
+
 Route::get('admin/register', [AdminController::class, 'showRegister'])->name('admin.register');
 Route::post('admin/register', [AdminController::class, 'register'])->name('admin.register.submit');
 

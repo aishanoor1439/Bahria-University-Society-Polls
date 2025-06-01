@@ -1,101 +1,105 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('layouts.app')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BUSPs-Reset Password</title>
-    <!-- Updated Bootstrap 5 CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .gradient-custom-2 {
-            /* fallback for old browsers */
-            background: #fccb90;
-            /* Chrome 10-25, Safari 5.1-6 */
-            background: -webkit-linear-gradient(to right, #2d1d61, #2d1d61, #2d1d61, #2d1d61);
-            /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-            background: linear-gradient(to right, #2d1d61, #2d1d61, #2d1d61, #2d1d61);
-        }
+@section('title', 'Reset Password')
 
-        .btn-custom {
-            color: #2d1d61;
-            border-color: #2d1d61;
-        }
+@section('styles')
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        min-height: 100vh;
+        overflow-x: hidden;
+        background-color: #f5f7fa !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
+@endsection
 
-        .btn-custom:hover {
-            background-color: #c5e3f4;
-            color: #2d1d61 !important;
-            border-color: #2d1d61;
-        }
+@section('content')
+<div class="society-background" id="societyBackground"></div>
 
-        @media (min-width: 768px) {
-            .gradient-form {
-                height: 100vh !important;
-            }
-        }
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card login-card animate__animated animate__fadeIn">
+                <div class="card-body p-md-5">
+                    <div class="text-center mb-5">
+                        <div class="logo-container floating">
+                            <img src="{{ asset('assets/img/Logo.png') }}" style="width: 180px;" alt="logo" class="img-fluid">
+                        </div>
+                        <h4 class="mt-4 mb-3 fw-bold" style="color: var(--primary-color);">Bahria University Society Polls</h4>
+                        <p class="text-muted">Reset Your Password</p>
+                    </div>
 
-        @media (min-width: 769px) {
-            .gradient-custom-2 {
-                border-top-right-radius: .3rem;
-                border-bottom-right-radius: .3rem;
-            }
-        }
+                    @if (session('status'))
+                    <div class="alert alert-success animate__animated animate__fadeInDown">
+                        <i class="fas fa-check-circle me-2"></i> {{ session('status') }}
+                    </div>
+                    @endif
 
-        /* Added styles for centering */
-        .center-form {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
+                    <form method="POST" action="{{ route('admin.password.update') }}" class="animate__animated animate__fadeIn animate__delay-1s">
+                        @csrf
+                        <input type="hidden" name="token">
 
-        .login-card {
-            width: 100%;
-            max-width: 500px;
-        }
-
-        .btn-link-custom {
-            text-decoration: none;
-            color: inherit;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-xl-10 center-form">
-                <div class="card rounded-3 text-black login-card">
-                    <div class="card-body p-md-5 mx-md-4">
-                        <div class="text-center">
-                            <img src="{{ asset('assets/img/Logo.png') }}" style="width: 180px;" alt="logo">
-                            <h4 class="mt-1 mb-5 pb-1">Reset Password</h4>
+                        <div class="form-outline mb-4">
+                            <label class="form-label" for="email"><i class="fas fa-envelope me-2"></i>Email</label>
+                            <input type="email" id="email" class="form-control" name="email" value="{{ $email ?? old('email') }}" required autocomplete="email" />
                         </div>
 
-                        <form method="POST" action="{{ route('admin.password.update') }}">
-                            @csrf
+                        <div class="form-outline mb-4 password-input-container">
+                            <label class="form-label" for="password"><i class="fas fa-lock me-2"></i>New Password</label>
+                            <input type="password" id="password" class="form-control" name="password" required autocomplete="new-password" />
+                            <i class="fas fa-eye password-toggle" id="togglePassword" onclick="togglePasswordVisibility('password')"></i>
+                        </div>
 
-                            <input type="hidden" name="token" value="{{ $token }}">
+                        <div class="form-outline mb-4 password-input-container">
+                            <label class="form-label" for="password-confirm"><i class="fas fa-lock me-2"></i>Confirm Password</label>
+                            <input type="password" id="password-confirm" class="form-control" name="password_confirmation" required autocomplete="new-password" />
+                            <i class="fas fa-eye password-toggle" id="togglePasswordConfirm" onclick="togglePasswordVisibility('password-confirm')"></i>
+                        </div>
 
-                            <div class="form-outline mb-4">
-                                <label class="form-label" for="form2Example22">Email</label>
-                                <input type="email" id="form2Example22" class="form-control" name="email" value="{{$email}}" required/>
-                            </div>
+                        <div class="text-center pt-1 mb-4">
+                            <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 w-100 py-3 fw-bold" type="submit">
+                                <i class="fas fa-key me-2"></i> Reset Password
+                            </button>
+                        </div>
 
-                            <div class="text-center pt-1 mb-5 pb-1">
-                                <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3 w-100" type="submit">
-                                    Send Password Reset Link
-                                </button>
-                            </div>
-                        </form>
-                    </div>
+                        <div class="d-flex align-items-center justify-content-center pb-4">
+                            <a href="{{ route('admin.login') }}" class="btn btn-custom btn-lg">
+                                <i class="fas fa-arrow-left me-2"></i> Back to Login
+                            </a>
+                        </div>
+
+                        @if ($errors->any()))
+                        <div class="alert alert-danger animate__animated animate__shakeX">
+                            <ul class="mb-0">
+                                @foreach ($errors->all() as $error)
+                                <li><i class="fas fa-exclamation-circle me-2"></i>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+</div>@endsection
 
-    <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-
-</html>
+@push('scripts')
+<script>
+    function togglePasswordVisibility(inputId) {
+        const passwordInput = document.getElementById(inputId);
+        const toggleIcon = passwordInput.nextElementSibling;
+        
+        if (passwordInput.type === 'password') {
+            passwordInput.type = 'text';
+            toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+        } else {
+            passwordInput.type = 'password';
+            toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+        }
+    }
+</script>
+@endpush

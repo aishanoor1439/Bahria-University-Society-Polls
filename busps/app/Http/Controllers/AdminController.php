@@ -25,7 +25,7 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:admin',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:6|max:12',
         ]);
 
         // Create and save the admin
@@ -44,7 +44,7 @@ class AdminController extends Controller
         // Validate the form data
         $request->validate([
             'email' => 'required|email',
-            'password' => 'required|min:6|max:12',
+            'password' => 'required',
         ]);
 
         // Find the admin by email
