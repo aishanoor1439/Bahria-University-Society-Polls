@@ -2,11 +2,15 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Auth\AdminForgotPasswordController;
-use App\Http\Controllers\Auth\AdminResetPasswordController;
+use App\Http\Controllers\AdminForgotPasswordController;
+use App\Http\Controllers\AdminResetPasswordController;
 
+// Testing routes
 Route::get('/admin/admin-reset', function () {
-    return view('auth/passwords/admin-reset');
+    return view('admin/admin-reset');
+});
+Route::get('/admin/panel', function () {
+    return view('layouts/panel');
 });
 
 Route::get('admin/register', [AdminController::class, 'showRegister'])->name('admin.register');

@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 
@@ -10,7 +10,7 @@ class AdminResetPasswordController extends Controller
 {
     public function showResetForm(Request $request, $token)
     {
-        return view('auth.passwords.admin-reset', [
+        return view('admin-reset', [
             'token' => $token,
             'email' => $request->email
         ]);
