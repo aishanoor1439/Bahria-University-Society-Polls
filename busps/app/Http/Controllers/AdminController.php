@@ -19,6 +19,11 @@ class AdminController extends Controller
         return view('admin.login');
     }
 
+    public function showSocieties()
+    {
+        return view('admin.societies');
+    }
+
     public function register(Request $request)
     {
         // Validate the form data

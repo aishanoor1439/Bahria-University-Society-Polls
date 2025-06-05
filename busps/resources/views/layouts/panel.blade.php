@@ -34,7 +34,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="table.html">
+                        <a href="{{ route('societies.index') }}">
                             <i class="ti-view-list-alt"></i>
                             <p>Societies</p>
                         </a>
