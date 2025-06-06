@@ -8,16 +8,25 @@ use Illuminate\Http\Request;
 
 class AdminPositionController extends Controller
 {
+
+    public function create(Society $society)
+    {
+        return view('admin.societies.positions.create', [
+            'society' => $society
+        ]);
+    }
+
     public function store(Request $request, Society $society)
     {
-        $request->validate([
+        $validated = $request->validate([
             'position_name' => 'required|string|max:50',
+            // Add other validation rules as needed
         ]);
 
-        $society->positions()->create($request->only('position_name'));
+        $society->positions()->create($validated);
 
         return redirect()->route('societies.show', $society->society_id)
-            ->with('success', 'Position added successfully.');
+            ->with('success', 'Position created successfully');
     }
 
     public function edit(Society $society, Position $position)
