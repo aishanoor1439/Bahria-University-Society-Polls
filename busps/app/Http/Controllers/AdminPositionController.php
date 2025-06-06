@@ -11,7 +11,7 @@ class AdminPositionController extends Controller
     public function store(Request $request, Society $society)
     {
         $request->validate([
-            'position_name' => 'required|string|max:255',
+            'position_name' => 'required|string|max:50',
         ]);
 
         $society->positions()->create($request->only('position_name'));
@@ -20,13 +20,21 @@ class AdminPositionController extends Controller
             ->with('success', 'Position added successfully.');
     }
 
+    public function edit(Society $society, Position $position)
+    {
+        return view('admin.societies.positions.edit', [
+            'society' => $society,
+            'position' => $position
+        ]);
+    }
+
     public function update(Request $request, Society $society, Position $position)
     {
-        $request->validate([
-            'position_name' => 'required|string|max:255',
+        $validated = $request->validate([
+            'position_name' => 'required|string|max:50',
         ]);
 
-        $position->update($request->only('position_name'));
+        $position->update($validated);
 
         return redirect()->route('societies.show', $society->society_id)
             ->with('success', 'Position updated successfully');

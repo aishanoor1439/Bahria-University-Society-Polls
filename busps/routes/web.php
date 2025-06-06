@@ -27,14 +27,19 @@ Route::get('/admin/dashboard', [AdminController::class, 'showDashboard'])->name(
 Route::resource('societies', AdminSocietyController::class);
 
 Route::prefix('societies/{society}')->group(function () {
-    // Positions routes
-    Route::resource('positions', AdminPositionController::class)->except(['index', 'show']);
-
-    // Members routes
-    Route::get('members', [SocietyMemberController::class, 'index'])->name('societies.members.index');
-    Route::post('members', [SocietyMemberController::class, 'store'])->name('societies.members.store');
-    Route::put('members/{student}', [SocietyMemberController::class, 'update'])->name('societies.members.update');
-    Route::delete('members/{student}', [SocietyMemberController::class, 'destroy'])->name('societies.members.destroy');
+     // Positions routes
+     Route::prefix('positions')->group(function () {
+          Route::get('create', [AdminPositionController::class, 'create'])->name('positions.create');
+          Route::post('/', [AdminPositionController::class, 'store'])->name('positions.store');
+          Route::get('{position}/edit', [AdminPositionController::class, 'edit'])->name('positions.edit');
+          Route::put('{position}', [AdminPositionController::class, 'update'])->name('positions.update');
+          Route::delete('{position}', [AdminPositionController::class, 'destroy'])->name('positions.destroy');
+     });
+     // Members routes
+     Route::get('members', [SocietyMemberController::class, 'index'])->name('societies.members.index');
+     Route::post('members', [SocietyMemberController::class, 'store'])->name('societies.members.store');
+     Route::put('members/{student}', [SocietyMemberController::class, 'update'])->name('societies.members.update');
+     Route::delete('members/{student}', [SocietyMemberController::class, 'destroy'])->name('societies.members.destroy');
 });
 
 // Password reset routes for admins

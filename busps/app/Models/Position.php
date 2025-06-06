@@ -1,5 +1,5 @@
 <?php
-// app/Models/Position.php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -13,4 +13,9 @@ class Position extends Model
     public $incrementing = true;
 
     protected $fillable = ['society_id', 'position_name'];
+
+    public function society()
+{
+    return $this->belongsTo(Society::class, 'society_id');
+}
 }

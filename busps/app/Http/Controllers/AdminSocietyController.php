@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/SocietyController.php
 
 namespace App\Http\Controllers;
 
@@ -22,7 +21,7 @@ class AdminSocietyController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'society_name' => 'required|string|max:255',
+            'society_name' => 'required|string|max:100',
             'description' => 'nullable|string',
         ]);
 
@@ -46,7 +45,7 @@ class AdminSocietyController extends Controller
     public function update(Request $request, Society $society)
     {
         $request->validate([
-            'society_name' => 'required|string|max:255',
+            'society_name' => 'required|string|max:100',
             'description' => 'nullable|string',
         ]);
 

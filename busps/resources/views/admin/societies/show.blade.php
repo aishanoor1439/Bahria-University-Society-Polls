@@ -28,36 +28,35 @@
 
                     <div class="positions-section mt-4">
                         <h4><i class="fas fa-users-cog"></i> Positions</h4>
-                        
                         @if($positions->count() > 0)
-                            <div class="list-group">
-                                @foreach($positions as $position)
-                                <div class="list-group-item">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <span>{{ $position->position_name }}</span>
-                                        <div>
-                                            <a href="{{ route('positions.edit', [$society->society_id, $position->position_id]) }}" 
-                                               class="btn btn-sm btn-primary">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <form method="POST" action="{{ route('positions.destroy', [$society->society_id, $position->position_id]) }}" 
-                                                  style="display: inline-block;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger" 
-                                                        onclick="return confirm('Delete this position?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        </div>
+                        <div class="list-group">
+                            @foreach($positions as $position)
+                            <div class="list-group-item">
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span>{{ $position->position_name }}</span>
+                                    <div>
+                                         <a href="{{ route('positions.edit', [$society->society_id, $position->position_id]) }}" 
+                                           class="btn btn-sm btn-primary">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        <form method="POST" action="{{ route('positions.destroy', [$society->society_id, $position->position_id]) }}"
+                                            style="display: inline-block;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger"
+                                                onclick="return confirm('Delete this position?')">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
-                                @endforeach
                             </div>
+                            @endforeach
+                        </div>
                         @else
-                            <div class="alert alert-info">
-                                <i class="fas fa-info-circle"></i> No positions have been added yet.
-                            </div>
+                        <div class="alert alert-info">
+                            <i class="fas fa-info-circle"></i> No positions have been added yet.
+                        </div>
                         @endif
 
                         <div class="mt-3">
@@ -71,18 +70,4 @@
         </div>
     </div>
 </div>
-
-<style>
-    .description-box {
-        background-color: #f8f9fa;
-        padding: 15px;
-        border-radius: 4px;
-        border-left: 4px solid #5bc0de;
-    }
-    .positions-section h4 {
-        padding-bottom: 10px;
-        border-bottom: 1px solid #eee;
-        margin-bottom: 20px;
-    }
-</style>
 @endsection
