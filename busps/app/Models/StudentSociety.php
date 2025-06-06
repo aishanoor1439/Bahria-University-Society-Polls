@@ -1,5 +1,5 @@
 <?php
-
+// app/Models/StudentSociety.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
@@ -10,6 +10,6 @@ class StudentSociety extends Pivot
 
     public function position()
     {
-        return $this->belongsTo(Position::class, 'position_id');
+        return $this->belongsTo(Position::class, 'position_id', 'position_id');
     }
 }

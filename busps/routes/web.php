@@ -23,13 +23,14 @@ Route::get('/admin/login', [AdminController::class, 'showLogin'])->name('admin.l
 Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.login.submit');
 
 Route::get('/admin/dashboard', [AdminController::class, 'showDashboard'])->name('admin.dashboard');
+
 Route::resource('societies', AdminSocietyController::class);
 
 Route::prefix('societies/{society}')->group(function () {
     // Positions routes
     Route::resource('positions', AdminPositionController::class)->except(['index', 'show']);
-    
-    // Members routes - Corrected (no nested prefix)
+
+    // Members routes
     Route::get('members', [SocietyMemberController::class, 'index'])->name('societies.members.index');
     Route::post('members', [SocietyMemberController::class, 'store'])->name('societies.members.store');
     Route::put('members/{student}', [SocietyMemberController::class, 'update'])->name('societies.members.update');
