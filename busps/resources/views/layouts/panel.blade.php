@@ -41,7 +41,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="table.html">
+                        <a href="{{ route('admin.elections.index') }}">
                             <i class="ti-view-list-alt"></i>
                             <p>Elections</p>
                         </a>

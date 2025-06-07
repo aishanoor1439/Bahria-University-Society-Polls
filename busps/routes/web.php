@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminResetPasswordController;
 use App\Http\Controllers\AdminSocietyController;
 use App\Http\Controllers\AdminPositionController;
 use App\Http\Controllers\SocietyMemberController;
+use App\Http\Controllers\AdminElectionController;
 
 // Testing routes
 Route::get('/admin/admin-reset', function () {
@@ -16,6 +17,8 @@ Route::get('/admin/panel', function () {
      return view('layouts/panel');
 });
 
+
+// Authentication routes for admin
 Route::get('admin/register', [AdminController::class, 'showRegister'])->name('admin.register');
 Route::post('admin/register', [AdminController::class, 'register'])->name('admin.register.submit');
 
@@ -24,6 +27,22 @@ Route::post('/admin/login', [AdminController::class, 'login'])->name('admin.logi
 
 Route::get('/admin/dashboard', [AdminController::class, 'showDashboard'])->name('admin.dashboard');
 
+// Password reset routes for admin
+Route::prefix('admin')->group(function () {
+     Route::get('/forgot-password', [AdminForgotPasswordController::class, 'showLinkRequestForm'])
+          ->name('admin.password.request');
+
+     Route::post('/forgot-password', [AdminForgotPasswordController::class, 'sendResetLinkEmail'])
+          ->name('admin.password.email');
+
+     Route::get('/reset-password/{token}', [AdminResetPasswordController::class, 'showResetForm'])
+          ->name('admin.password.reset');
+
+     Route::post('/reset-password', [AdminResetPasswordController::class, 'reset'])
+          ->name('admin.password.update');
+});
+
+//Society management routes for admin
 Route::resource('societies', AdminSocietyController::class);
 
 Route::prefix('societies/{society}')->group(function () {
@@ -42,17 +61,15 @@ Route::prefix('societies/{society}')->group(function () {
      Route::delete('members/{student}', [SocietyMemberController::class, 'destroy'])->name('societies.members.destroy');
 });
 
-// Password reset routes for admins
-Route::prefix('admin')->group(function () {
-     Route::get('/forgot-password', [AdminForgotPasswordController::class, 'showLinkRequestForm'])
-          ->name('admin.password.request');
-
-     Route::post('/forgot-password', [AdminForgotPasswordController::class, 'sendResetLinkEmail'])
-          ->name('admin.password.email');
-
-     Route::get('/reset-password/{token}', [AdminResetPasswordController::class, 'showResetForm'])
-          ->name('admin.password.reset');
-
-     Route::post('/reset-password', [AdminResetPasswordController::class, 'reset'])
-          ->name('admin.password.update');
+// Election management routes for admin
+// Route::prefix('admin')->group(function () {
+//      Route::resource('elections', AdminElectionController::class);
+//      Route::post('elections/{election}/toggle-active', [AdminElectionController::class, 'toggleActive'])
+//           ->name('admin.elections.toggle-active');
+// });
+// routes/web.php
+Route::prefix('admin')->name('admin.')->group(function () {
+    Route::resource('elections', AdminElectionController::class);
+    Route::post('elections/{election}/toggle-active', [AdminElectionController::class, 'toggleActive'])
+         ->name('elections.toggle-active');
 });
