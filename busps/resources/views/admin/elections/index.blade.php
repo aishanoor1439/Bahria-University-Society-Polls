@@ -43,6 +43,10 @@
                             </form>
                         </td>
                         <td>
+                            <a href="{{ route('admin.elections.candidates.index', $election->election_id) }}" 
+                               class="btn btn-sm btn-info">
+                                <i class="fas fa-users"></i> Candidates
+                            </a>
                             <a href="{{ route('admin.elections.edit', $election->election_id) }}" class="btn btn-sm btn-primary">
                                 <i class="fas fa-edit"></i>
                             </a>

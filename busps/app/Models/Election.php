@@ -31,7 +31,7 @@ class Election extends Model
         return $this->belongsTo(Society::class, 'society_id', 'society_id');
     }
 
-     public function scopeActive($query)
+    public function scopeActive($query)
     {
         return $query->where('is_active', true);
     }
@@ -39,5 +39,10 @@ class Election extends Model
     public function scopeInactive($query)
     {
         return $query->where('is_active', false);
+    }
+
+    public function candidates()
+    {
+        return $this->hasMany(Candidate::class, 'election_id', 'election_id');
     }
 }

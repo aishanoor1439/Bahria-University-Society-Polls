@@ -15,9 +15,24 @@ class Student extends Authenticatable
     protected $fillable = ['name', 'email', 'password'];
     protected $hidden = ['password'];
 
+    public function societies()
+    {
+        return $this->hasMany(StudentSociety::class, 'student_id');
+    }
+
     public function societyMemberships()
     {
         return $this->belongsToMany(Society::class, 'student_societies', 'student_id', 'society_id')
-                    ->withPivot('position_id');
+            ->withPivot('position_id');
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class, 'student_id');
+    }
+
+    public function candidates()
+    {
+        return $this->hasMany(Candidate::class, 'student_id', 'student_id');
     }
 }

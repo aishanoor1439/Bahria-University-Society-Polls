@@ -8,6 +8,7 @@ use App\Http\Controllers\AdminSocietyController;
 use App\Http\Controllers\AdminPositionController;
 use App\Http\Controllers\SocietyMemberController;
 use App\Http\Controllers\AdminElectionController;
+use App\Http\Controllers\ElectionCandidateController;
 
 // Testing routes
 Route::get('/admin/admin-reset', function () {
@@ -62,14 +63,20 @@ Route::prefix('societies/{society}')->group(function () {
 });
 
 // Election management routes for admin
-// Route::prefix('admin')->group(function () {
-//      Route::resource('elections', AdminElectionController::class);
-//      Route::post('elections/{election}/toggle-active', [AdminElectionController::class, 'toggleActive'])
-//           ->name('admin.elections.toggle-active');
-// });
-// routes/web.php
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::resource('elections', AdminElectionController::class);
-    Route::post('elections/{election}/toggle-active', [AdminElectionController::class, 'toggleActive'])
-         ->name('elections.toggle-active');
+     // Main elections resource
+     Route::resource('elections', AdminElectionController::class);
+
+     // Toggle active status
+     Route::post('elections/{election}/toggle-active', [AdminElectionController::class, 'toggleActive'])
+          ->name('elections.toggle-active');
+
+     // Candidate management routes
+     Route::prefix('elections/{election}/candidates')->name('elections.candidates.')->group(function () {
+          Route::get('/', [ElectionCandidateController::class, 'index'])->name('index');
+          Route::put('{application}/approve', [ElectionCandidateController::class, 'approve'])->name('approve');
+          Route::put('{application}/reject', [ElectionCandidateController::class, 'reject'])->name('reject');
+          Route::delete('{candidate}', [ElectionCandidateController::class, 'remove'])->name('remove');
+          Route::post('{application}/reconsider', [ElectionCandidateController::class, 'reconsider'])->name('reconsider');
+     });
 });
