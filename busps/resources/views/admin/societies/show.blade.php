@@ -1,6 +1,6 @@
 @extends('layouts.panel')
 
-@section('title', 'View Society')
+@section('title', 'Society Details')
 
 @section('content')
 <div class="col-md-12">
@@ -8,10 +8,10 @@
         <div class="header">
             <h4 class="title">{{ $society->society_name }}</h4>
             <div class="pull-right">
-                <a href="{{ route('societies.members.index', $society->society_id) }}" class="btn btn-info">
+                <a href="{{ route('societies.members.index', $society->society_id) }}" class="btn btn-manage">
                     <i class="fas fa-users"></i> Manage Members
                 </a>
-                <a href="{{ route('societies.index') }}" class="btn btn-default">
+                <a href="{{ route('societies.index') }}" class="btn btn-custom">
                     <i class="fas fa-arrow-left"></i> Back to List
                 </a>
             </div>
@@ -35,9 +35,9 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                     <span>{{ $position->position_name }}</span>
                                     <div>
-                                         <a href="{{ route('positions.edit', [$society->society_id, $position->position_id]) }}" 
-                                           class="btn btn-sm btn-primary">
-                                            <i class="fas fa-edit"></i>
+                                        <a href="{{ route('positions.edit', [$society->society_id, $position->position_id]) }}"
+                                            class="btn btn-xs btn-warning">
+                                            <i class="fa fa-pencil"></i>
                                         </a>
                                         <form method="POST" action="{{ route('positions.destroy', [$society->society_id, $position->position_id]) }}"
                                             style="display: inline-block;">
@@ -54,7 +54,7 @@
                             @endforeach
                         </div>
                         @else
-                        <div class="alert alert-info">
+                        <div class="alert alert-danger">
                             <i class="fas fa-info-circle"></i> No positions have been added yet.
                         </div>
                         @endif

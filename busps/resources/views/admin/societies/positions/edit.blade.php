@@ -6,9 +6,9 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Edit Position: {{ $position->position_name }}</h4>
+            <h4 class="title">{{ $position->position_name }}</h4>
             <div class="pull-right">
-                <a href="{{ route('societies.show', $society->society_id) }}" class="btn btn-default">
+                <a href="{{ route('societies.show', $society->society_id) }}" class="btn btn-custom">
                     <i class="fas fa-arrow-left"></i> Back to Society
                 </a>
             </div>
@@ -23,10 +23,7 @@
                     <input type="text" class="form-control" id="position_name" name="position_name" 
                            value="{{ old('position_name', $position->position_name) }}" required>
                 </div>
-
-                <!-- Add other form fields as needed -->
-
-                <button type="submit" class="btn btn-primary">
+                <button type="submit" class="btn btn-success">
                     <i class="fas fa-save"></i> Update Position
                 </button>
             </form>

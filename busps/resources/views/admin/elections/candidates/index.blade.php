@@ -1,17 +1,15 @@
 @extends('layouts.panel')
 
-@section('title', 'Manage Candidates - ' . $election->election_name)
+@section('title', 'Manage Candidates')
 
 @section('content')
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Candidates for {{ $election->election_name }}</h4>
-            <div class="pull-right">
-                <a href="{{ route('admin.elections.index') }}" class="btn btn-default">
-                    <i class="fas fa-arrow-left"></i> Back to Elections
-                </a>
-            </div>
+            <h4 class="title">{{ $election->election_name }}</h4>
+            <a href="{{ route('admin.elections.index') }}" class="btn btn-custom">
+                <i class="fas fa-arrow-left"></i> Back to Elections
+            </a>
         </div>
         <div class="content table-responsive">
             <table class="table table-hover">
@@ -24,7 +22,6 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Approved Candidates (from candidates table) -->
                     @foreach($election->candidates as $candidate)
                     <tr>
                         <td>{{ $candidate->student->name }}</td>
@@ -42,7 +39,6 @@
                             </span>
                         </td>
                         <td>
-                            <!-- Add any actions for approved candidates -->
                             <form action="{{ route('admin.elections.candidates.remove', [$election->election_id, $candidate->candidate_id]) }}"
                                 method="POST" style="display: inline;">
                                 @csrf
@@ -55,7 +51,6 @@
                     </tr>
                     @endforeach
 
-                    <!-- Pending Applications -->
                     @foreach($applications->where('status', 'pending') as $application)
                     <tr>
                         <td>{{ $application->student->name }}</td>
@@ -93,7 +88,6 @@
                     </tr>
                     @endforeach
 
-                    <!-- Rejected Applications (optional) -->
                     @foreach($applications->where('status', 'rejected') as $application)
                     <tr class="text-muted">
                         <td>{{ $application->student->name }}</td>
@@ -111,11 +105,10 @@
                             </span>
                         </td>
                         <td>
-                            <!-- Option to reconsider rejected applications -->
                             <form action="{{ route('admin.elections.candidates.reconsider', [$election->election_id, $application->application_id]) }}"
                                 method="POST" style="display: inline;">
                                 @csrf
-                                <button type="submit" class="btn btn-sm btn-info">
+                                <button type="submit" class="btn btn-sm btn-warning">
                                     <i class="fas fa-redo"></i> Reconsider
                                 </button>
                             </form>

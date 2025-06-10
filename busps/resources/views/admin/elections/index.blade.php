@@ -6,12 +6,10 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Elections</h4>
-            <div class="pull-right">
-                <a href="{{ route('admin.elections.create') }}" class="btn btn-success">
-                    <i class="fas fa-plus"></i> Add New Election
-                </a>
-            </div>
+            <h4 class="title">Registered Elections</h4>
+            <a href="{{ route('admin.elections.create') }}" class="btn btn-primary gradient-custom-2 w-100 fw-bold fa-md">
+                Add New Election
+            </a>
         </div>
         <div class="content table-responsive">
             <table class="table table-hover">
@@ -43,12 +41,11 @@
                             </form>
                         </td>
                         <td>
-                            <a href="{{ route('admin.elections.candidates.index', $election->election_id) }}" 
-                               class="btn btn-sm btn-info">
-                                <i class="fas fa-users"></i> Candidates
+                            <a href="{{ route('admin.elections.candidates.index', $election->election_id) }}" class="btn btn-manage">
+                                <i class="fas fa-users"></i> Manage candidates
                             </a>
-                            <a href="{{ route('admin.elections.edit', $election->election_id) }}" class="btn btn-sm btn-primary">
-                                <i class="fas fa-edit"></i>
+                            <a href="{{ route('admin.elections.edit', $election->election_id) }}" class="btn btn-xs btn-warning">
+                                <i class="fa fa-pencil"></i>
                             </a>
                             <form action="{{ route('admin.elections.destroy', $election->election_id) }}" method="POST" style="display:inline">
                                 @csrf

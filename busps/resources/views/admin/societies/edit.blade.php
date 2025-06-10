@@ -1,7 +1,6 @@
-{{-- resources/views/admin/societies/edit.blade.php --}}
 @extends('layouts.panel')
 
-@section('title', 'Edit Society')
+@section('title', 'Manage Societies')
 
 @section('content')
 <div class="col-md-12">
@@ -24,8 +23,8 @@
                     <textarea class="form-control" id="description" name="description" rows="3">{{ $society->description }}</textarea>
                 </div>
                 
-                <button type="submit" class="btn btn-info btn-fill pull-right">Update Society</button>
-                <a href="{{ route('societies.index') }}" class="btn btn-default pull-right">Cancel</a>
+                <button type="submit" class="btn btn-primary gradient-custom-2 w-100 fw-bold fa-md">Update Society</button>
+                <a href="{{ route('societies.index') }}" class="btn btn-custom">Cancel</a>
                 <div class="clearfix"></div>
             </form>
         </div>

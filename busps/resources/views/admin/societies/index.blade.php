@@ -1,15 +1,13 @@
-{{-- resources/views/admin/societies/index.blade.php --}}
 @extends('layouts.panel')
 
-@section('title', 'Admin')
+@section('title', 'Manage Societies')
 
 @section('content')
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Societies List</h4>
-            <p class="category">Manage all registered societies</p>
-            <a href="{{ route('societies.create') }}" class="btn btn-info btn-fill pull-right">Add New Society</a>
+            <h4 class="title">Registered Societies</h4>
+            <p class="category">Manage all societies</p>
         </div>
         <div class="content table-responsive table-full-width">
             <table class="table table-striped">
@@ -44,6 +42,7 @@
                     @endforeach
                 </tbody>
             </table>
+            <a href="{{ route('societies.create') }}" class="btn btn-primary gradient-custom-2 w-100 fw-bold fa-md">Add New Society</a>
         </div>
     </div>
 </div>
