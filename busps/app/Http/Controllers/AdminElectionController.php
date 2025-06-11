@@ -39,7 +39,6 @@ class AdminElectionController extends Controller
 
     public function show(string $id)
     {
-        // Implement if needed
     }
 
     public function edit(string $id)

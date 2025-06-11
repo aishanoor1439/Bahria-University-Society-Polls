@@ -20,7 +20,6 @@ class AdminPositionController extends Controller
     {
         $validated = $request->validate([
             'position_name' => 'required|string|max:50',
-            // Add other validation rules as needed
         ]);
 
         $society->positions()->create($validated);

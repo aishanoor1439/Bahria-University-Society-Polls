@@ -59,10 +59,8 @@ class ElectionCandidateController extends Controller
 
     public function remove(Election $election, Candidate $candidate)
     {
-        // Remove from candidates table
         $candidate->delete();
 
-        // Update application status if exists
         Application::where([
             'student_id' => $candidate->student_id,
             'election_id' => $candidate->election_id

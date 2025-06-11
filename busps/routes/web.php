@@ -9,6 +9,9 @@ use App\Http\Controllers\AdminPositionController;
 use App\Http\Controllers\SocietyMemberController;
 use App\Http\Controllers\AdminElectionController;
 use App\Http\Controllers\ElectionCandidateController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserForgotPasswordController;
+use App\Http\Controllers\UserResetPasswordController;
 
 // Testing routes
 Route::get('/admin/admin-reset', function () {
@@ -79,4 +82,32 @@ Route::prefix('admin')->name('admin.')->group(function () {
           Route::delete('{candidate}', [ElectionCandidateController::class, 'remove'])->name('remove');
           Route::post('{application}/reconsider', [ElectionCandidateController::class, 'reconsider'])->name('reconsider');
      });
+});
+
+// Logout route for admin
+Route::post('/admin/logout', [AdminController::class, 'logout'])
+     ->name('admin.logout');
+
+// Authentication routes for student
+Route::get('user/register', [UserController::class, 'showRegister'])->name('user.register');
+Route::post('user/register', [UserController::class, 'register'])->name('user.register.submit');
+
+Route::get('/user/login', [UserController::class, 'showLogin'])->name('user.login');
+Route::post('/user/login', [UserController::class, 'login'])->name('user.login.submit');
+
+Route::get('/user/dashboard', [UserController::class, 'showDashboard'])->name('user.dashboard');
+
+// Password reset routes for student
+Route::prefix('student')->group(function () {
+     Route::get('/forgot-password', [UserForgotPasswordController::class, 'showLinkRequestForm'])
+          ->name('user.password.request');
+
+     Route::post('/forgot-password', [UserForgotPasswordController::class, 'sendResetLinkEmail'])
+          ->name('user.password.email');
+
+     Route::get('/reset-password/{token}', [UserResetPasswordController::class, 'showResetForm'])
+          ->name('user.password.reset');
+
+     Route::post('/reset-password', [UserResetPasswordController::class, 'reset'])
+          ->name('user.password.update');
 });

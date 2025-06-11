@@ -1,5 +1,4 @@
 <?php
-// app/Http/Controllers/SocietyMemberController.php
 namespace App\Http\Controllers;
 
 use App\Models\Society;
@@ -12,7 +11,6 @@ class SocietyMemberController extends Controller
 {
     public function index(Society $society)
     {
-        // Get members with their positions using raw SQL to avoid ambiguity
         $members = DB::table('student_societies')
             ->join('students', 'student_societies.student_id', '=', 'students.student_id')
             ->leftJoin('positions', 'student_societies.position_id', '=', 'positions.position_id')
@@ -28,7 +26,6 @@ class SocietyMemberController extends Controller
 
         $positions = Position::where('society_id', $society->society_id)->get();
 
-        // Get non-members
         $nonMembers = DB::table('students')
             ->whereNotIn('student_id', function ($query) use ($society) {
                 $query->select('student_id')

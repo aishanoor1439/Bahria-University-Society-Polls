@@ -1,6 +1,6 @@
  @extends('layouts.panel')
 
- @section('title', 'Admin Dashboard')
+ @section('title', 'Student Dashboard')
 
  @section('content')
  
