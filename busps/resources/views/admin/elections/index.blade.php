@@ -6,7 +6,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Registered Elections</h4>
+            <h4 class="title">Schedualed Elections</h4>
             <a href="{{ route('admin.elections.create') }}" class="btn btn-primary gradient-custom-2 w-100 fw-bold fa-md">
                 Add New Election
             </a>
@@ -35,7 +35,7 @@
                         <td>
                             <form action="{{ route('admin.elections.toggle-active', $election->election_id) }}" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-sm btn-{{ $election->is_active ? 'success' : 'warning' }}">
+                                <button type="submit" class="btn btn-{{ $election->is_active ? 'success' : 'warning' }}">
                                     {{ $election->is_active ? 'Active' : 'Inactive' }}
                                 </button>
                             </form>

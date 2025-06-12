@@ -6,9 +6,9 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Create New Election</h4>
+            <h4 class="title">Schedual New Election</h4>
             <div class="pull-right">
-                <a href="{{ route('admin.elections.index') }}" class="btn btn-default">
+                <a href="{{ route('admin.elections.index') }}" class="btn btn-custom">
                     <i class="fas fa-arrow-left"></i> Back to List
                 </a>
             </div>
