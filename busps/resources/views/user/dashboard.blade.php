@@ -1,4 +1,4 @@
- @extends('layouts.panel')
+ @extends('layouts.user-panel')
 
  @section('title', 'Student Dashboard')
 

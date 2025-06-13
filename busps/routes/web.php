@@ -12,6 +12,7 @@ use App\Http\Controllers\ElectionCandidateController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserForgotPasswordController;
 use App\Http\Controllers\UserResetPasswordController;
+use App\Http\Controllers\StudentSocietyController;
 
 // Testing routes
 Route::get('/admin/admin-reset', function () {
@@ -97,6 +98,10 @@ Route::post('/user/login', [UserController::class, 'login'])->name('user.login.s
 
 Route::get('/user/dashboard', [UserController::class, 'showDashboard'])->name('user.dashboard');
 
+// Logout route for admin
+Route::post('/user/logout', [UserController::class, 'logout'])
+     ->name('user.logout');
+
 // Password reset routes for student
 Route::prefix('student')->group(function () {
      Route::get('/forgot-password', [UserForgotPasswordController::class, 'showLinkRequestForm'])
@@ -110,4 +115,10 @@ Route::prefix('student')->group(function () {
 
      Route::post('/reset-password', [UserResetPasswordController::class, 'reset'])
           ->name('user.password.update');
+});
+
+// Student Society Routes
+Route::prefix('student')->name('student.')->group(function() {
+    Route::get('/societies', [StudentSocietyController::class, 'index'])->name('societies.index');
+    Route::get('/societies/{society}', [StudentSocietyController::class, 'show'])->name('societies.show');
 });

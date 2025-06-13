@@ -264,7 +264,7 @@
 
                 <ul class="nav">
                     <li>
-                        <a href="dashboard.html">
+                        <a href="{{route('admin.dashboard')}}">
                             <i class="ti-panel" style="color: var(--primary-light);"></i>
                             <p>Dashboard</p>
                         </a>

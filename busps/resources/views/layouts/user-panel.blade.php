@@ -264,13 +264,13 @@
 
                 <ul class="nav">
                     <li>
-                        <a href="dashboard.html">
+                        <a href="{{ route('user.dashboard') }}">
                             <i class="ti-panel" style="color: var(--primary-light);"></i>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('societies.index') }}">
+                        <a href="{{ route('student.societies.index') }}">
                             <i class="ti-view-list-alt" style="color: var(--primary-light);"></i>
                             <p>Societies</p>
                         </a>
@@ -329,11 +329,11 @@
                                     <b class="caret"></b>
                                 </a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="{{ route('admin.password.request') }}">Change Password</a></li>
+                                    <li><a href="{{ route('user.password.request') }}">Change Password</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="{{ route('admin.logout') }}" class="dropdown-toggle" w
+                                <a href="{{ route('user.logout') }}" class="dropdown-toggle" w
                                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                     Logout<i class="ti-arrow-right" style="color: var(--primary-light);"></i>
                                 </a>
@@ -370,7 +370,7 @@
         </div>
     </div>
 
-    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+    <form id="logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
         @csrf
     </form>
 

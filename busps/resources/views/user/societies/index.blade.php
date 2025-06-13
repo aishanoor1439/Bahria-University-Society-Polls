@@ -1,48 +1,55 @@
 @extends('layouts.panel')
 
-@section('title', 'Manage Societies')
+@section('title', 'My Societies')
 
 @section('content')
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Registered Societies</h4>
-            <p class="category">Manage all societies</p>
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="title">
+                    <i class="fas fa-user-friends me-2"></i>You are a member of
+                </h4>
+                @if(!$societies->isEmpty())
+                <span class="badge bg-primary">
+                    {{ $societies->count() }} societies
+                </span>
+                @endif
+            </div>
         </div>
-        <div class="content table-responsive table-full-width">
-            <table class="table table-striped">
-                <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Actions</th>
-                </thead>
-                <tbody>
-                    @foreach($societies as $society)
-                    <tr>
-                        <td>{{ $society->society_id }}</td>
-                        <td>{{ $society->society_name }}</td>
-                        <td>{{ Str::limit($society->description, 50) }}</td>
-                        <td>
-                            <a href="{{ route('societies.show', $society->society_id) }}" class="btn btn-xs btn-info">
-                                <i class="fa fa-eye"></i>
-                            </a>
-                            <a href="{{ route('societies.edit', $society->society_id) }}" class="btn btn-xs btn-warning">
-                                <i class="fa fa-pencil"></i>
-                            </a>
-                            <form action="{{ route('societies.destroy', $society->society_id) }}" method="POST" style="display: inline-block;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-xs btn-danger" onclick="return confirm('Are you sure?')">
-                                    <i class="fa fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
-            <a href="{{ route('societies.create') }}" class="btn btn-primary gradient-custom-2 w-100 fw-bold fa-md">Add New Society</a>
+
+        <div class="content">
+            @if(session('error'))
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
+            </div>
+            @endif
+
+            @forelse($societies as $society)
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <div>
+                            <h5 class="card-title">
+                                <a href="{{ route('student.societies.show', $society) }}" class="text-primary">
+                                    {{ $society->society_name }}
+                                </a>
+                            </h5>
+                            <p class="card-text text-muted">
+                                <i class="fas fa-align-left me-2"></i>{{ Str::limit($society->description, 150) }}
+                            </p>
+                        </div>
+                        <span class="badge bg-secondary">
+                            <i class="fas fa-user me-1"></i>{{ $society->members_count }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            @empty
+            <div class="alert alert-info">
+                <i class="fas fa-info-circle me-2"></i> You haven't joined any societies yet.
+            </div>
+            @endforelse
         </div>
     </div>
 </div>

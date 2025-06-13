@@ -23,8 +23,8 @@
                     <textarea class="form-control" id="description" name="description" rows="3"></textarea>
                 </div>
                 
-                <button type="submit" class="btn btn-info btn-fill pull-right">Create Society</button>
-                <a href="{{ route('societies.index') }}" class="btn btn-default pull-right">Cancel</a>
+                <button type="submit" class="btn btn-primary gradient-custom-2 w-100 fw-bold fa-md">Create Society</button>
+                <a href="{{ route('societies.index') }}" class="btn btn-custom">Cancel</a>
                 <div class="clearfix"></div>
             </form>
         </div>

@@ -9,10 +9,14 @@
             <h4 class="title">Registered Societies</h4>
             <p class="category">Manage all societies</p>
         </div>
+        @if($societies->isEmpty())
+        <div class="alert alert-danger">
+            <i class="fas fa-info-circle"></i> No societies have been added yet.
+        </div>
+        @else
         <div class="content table-responsive table-full-width">
             <table class="table table-striped">
                 <thead>
-                    <th>ID</th>
                     <th>Name</th>
                     <th>Description</th>
                     <th>Actions</th>
@@ -20,7 +24,6 @@
                 <tbody>
                     @foreach($societies as $society)
                     <tr>
-                        <td>{{ $society->society_id }}</td>
                         <td>{{ $society->society_name }}</td>
                         <td>{{ Str::limit($society->description, 50) }}</td>
                         <td>
@@ -42,6 +45,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
             <a href="{{ route('societies.create') }}" class="btn btn-primary gradient-custom-2 w-100 fw-bold fa-md">Add New Society</a>
         </div>
     </div>

@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -22,7 +23,8 @@ class Student extends Authenticatable
     public function societyMemberships()
     {
         return $this->belongsToMany(Society::class, 'student_societies', 'student_id', 'society_id')
-            ->withPivot('position_id');
+            ->withPivot('position_id')
+            ->using(StudentSociety::class);
     }
 
     public function applications()

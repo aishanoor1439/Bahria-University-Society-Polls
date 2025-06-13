@@ -7,10 +7,12 @@
     <div class="card">
         <div class="header">
             <h4 class="title">Schedualed Elections</h4>
-            <a href="{{ route('admin.elections.create') }}" class="btn btn-primary gradient-custom-2 w-100 fw-bold fa-md">
-                Add New Election
-            </a>
         </div>
+        @if($elections->isEmpty())
+        <div class="alert alert-danger">
+            <i class="fas fa-info-circle"></i> No elections have been added yet.
+        </div>
+        @else
         <div class="content table-responsive">
             <table class="table table-hover">
                 <thead>
@@ -59,6 +61,10 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
+            <a href="{{ route('admin.elections.create') }}" class="btn btn-primary gradient-custom-2 w-100 fw-bold fa-md">
+                Add New Election
+            </a>
         </div>
     </div>
 </div>

@@ -1,17 +1,22 @@
 @extends('layouts.panel')
 
-@section('title', 'Manage Candidates')
+@section('title', 'Manage Election Candidates')
 
 @section('content')
 <div class="col-md-12">
     <div class="card">
         <div class="header">
             <h4 class="title">{{ $election->election_name }}</h4>
-            <a href="{{ route('admin.elections.index') }}" class="btn btn-custom">
-                <i class="fas fa-arrow-left"></i> Back to Elections
-            </a>
+                <a href="{{ route('admin.elections.index') }}" class="btn btn-custom">
+                    <i class="fas fa-arrow-left"></i> Back to Elections
+                </a>
         </div>
         <div class="content table-responsive">
+            @if($election->candidates->isEmpty())
+            <div class="alert alert-danger">
+                <i class="fas fa-info-circle"></i> No applications found!
+            </div>
+            @else
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -117,6 +122,7 @@
                     @endforeach
                 </tbody>
             </table>
+            @endif
         </div>
     </div>
 </div>

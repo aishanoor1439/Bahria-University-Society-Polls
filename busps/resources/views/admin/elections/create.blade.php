@@ -7,22 +7,17 @@
     <div class="card">
         <div class="header">
             <h4 class="title">Schedual New Election</h4>
-            <div class="pull-right">
-                <a href="{{ route('admin.elections.index') }}" class="btn btn-custom">
-                    <i class="fas fa-arrow-left"></i> Back to List
-                </a>
-            </div>
         </div>
         <div class="content">
             <form method="POST" action="{{ route('admin.elections.store') }}">
                 @csrf
-                
+
                 <div class="form-group">
                     <label for="society_id">Society</label>
                     <select class="form-control" id="society_id" name="society_id" required>
                         <option value="">Select Society</option>
                         @foreach($societies as $society)
-                            <option value="{{ $society->society_id }}">{{ $society->society_name }}</option>
+                        <option value="{{ $society->society_id }}">{{ $society->society_name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -34,8 +29,8 @@
 
                 <div class="form-group">
                     <label for="election_year">Election Year</label>
-                    <input type="number" class="form-control" id="election_year" name="election_year" 
-                           min="1900" max="{{ date('Y') + 1 }}" value="{{ date('Y') }}" required>
+                    <input type="number" class="form-control" id="election_year" name="election_year"
+                        min="1900" max="{{ date('Y') + 1 }}" value="{{ date('Y') }}" required>
                 </div>
 
                 <div class="row">
@@ -53,9 +48,8 @@
                     </div>
                 </div>
 
-                <button type="submit" class="btn btn-success">
-                    <i class="fas fa-save"></i> Create Election
-                </button>
+                <button type="submit" class="btn btn-primary gradient-custom-2 w-100 fw-bold fa-md">Create Election</button>
+                <a href="{{ route('admin.elections.index') }}" class="btn btn-custom">Cancel</a>
             </form>
         </div>
     </div>
