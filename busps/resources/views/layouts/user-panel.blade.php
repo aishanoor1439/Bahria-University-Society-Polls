@@ -226,6 +226,10 @@
             padding: 0;
         }
 
+        .badge{
+            background-color: var(--primary-light);
+        }
+
         .footer {
             border-top: 1px solid rgba(0, 0, 0, 0.05);
             padding: 20px 0;
@@ -276,7 +280,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.elections.index') }}">
+                        <a href="{{ route('societies.index02') }}">
                             <i class="ti-calendar" style="color: var(--primary-light);"></i>
                             <p>Elections</p>
                         </a>

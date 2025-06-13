@@ -13,6 +13,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserForgotPasswordController;
 use App\Http\Controllers\UserResetPasswordController;
 use App\Http\Controllers\StudentSocietyController;
+use App\Http\Controllers\StudentElectionController;
 
 // Testing routes
 Route::get('/admin/admin-reset', function () {
@@ -122,3 +123,6 @@ Route::prefix('student')->name('student.')->group(function() {
     Route::get('/societies', [StudentSocietyController::class, 'index'])->name('societies.index');
     Route::get('/societies/{society}', [StudentSocietyController::class, 'show'])->name('societies.show');
 });
+
+// Student Election Routes
+Route::get('/societies', [StudentElectionController::class, 'index'])->name('societies.index02');

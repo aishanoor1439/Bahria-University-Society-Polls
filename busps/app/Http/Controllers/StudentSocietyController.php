@@ -26,29 +26,6 @@ class StudentSocietyController extends Controller
         return view('user.societies.index', compact('societies'));
     }
 
-    // public function show(Society $society)
-    // {
-    //     $studentId = Auth::guard('student')->id();
-
-
-    //     if (!$studentId) {
-    //         return redirect('user/login')->with('error', 'Please login first!');
-    //     }
-
-    //     $isMember = StudentSociety::where('student_id', $studentId)
-    //         ->where('society_id', $society->society_id)
-    //         ->exists();
-
-    //     if (!$isMember) {
-    //         return back()->with('error', 'Access denied - Not a society member');
-    //     }
-
-    //     $society = Society::with(['members.pivot.position'])
-    //         ->find($society->society_id);
-
-    //     return view('user.societies.show', compact('society', 'studentId'));
-    // }
-
     public function show(Society $society)
     {
         $members = DB::table('student_societies')

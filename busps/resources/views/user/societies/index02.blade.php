@@ -11,7 +11,7 @@
                     <i class="fas fa-user-friends me-2"></i>You are a member of
                 </h4>
                 @if(!$societies->isEmpty())
-                <span class="badge">
+                <span class="badge bg-primary">
                     {{ $societies->count() }} societies
                 </span>
                 @endif
