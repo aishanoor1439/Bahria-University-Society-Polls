@@ -8,7 +8,7 @@
         <div class="header">
             <div class="d-flex justify-content-between align-items-center">
                 <h4 class="title">
-                    <i class="fas fa-vote-yea me-2"></i>{{ $society->society_name }}
+                    {{ $society->society_name }}
                 </h4>
                 <a href="{{ route('student.elections.societies.index') }}" class="btn btn-custom">
                     <i class="fas fa-arrow-left me-1"></i> Back to Societies
@@ -35,7 +35,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-start">
                             <div>
-                                <h5 class="card-title">{{ $election->election_name }}</h5>
+                                <i class="fas fa-vote-yea me-2"></i><h5 class="card-title">{{ $election->election_name }}</h5>
                                 <p class="card-text text-muted">
                                     <i class="fas fa-calendar-alt me-2"></i>
                                     {{ \Carbon\Carbon::parse($election->start_date)->format('M d, Y H:i') }} to

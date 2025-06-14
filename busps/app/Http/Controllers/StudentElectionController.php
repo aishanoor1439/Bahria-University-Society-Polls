@@ -34,6 +34,7 @@ class StudentElectionController extends Controller
     public function showElections(Society $society)
     {
         $elections = DB::table('elections')
+            ->where('is_active', 1)
             ->where('society_id', $society->society_id)
             ->get();
 
