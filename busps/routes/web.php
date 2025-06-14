@@ -14,6 +14,8 @@ use App\Http\Controllers\UserForgotPasswordController;
 use App\Http\Controllers\UserResetPasswordController;
 use App\Http\Controllers\StudentSocietyController;
 use App\Http\Controllers\StudentElectionController;
+use Illuminate\Support\Facades\DB;
+use App\Models\Election;
 
 // Testing routes
 Route::get('/admin/admin-reset', function () {
@@ -119,10 +121,22 @@ Route::prefix('student')->group(function () {
 });
 
 // Student Society Routes
-Route::prefix('student')->name('student.')->group(function() {
-    Route::get('/societies', [StudentSocietyController::class, 'index'])->name('societies.index');
-    Route::get('/societies/{society}', [StudentSocietyController::class, 'show'])->name('societies.show');
+Route::prefix('student')->name('student.')->group(function () {
+     Route::get('/societies', [StudentSocietyController::class, 'index'])->name('societies.index');
+     Route::get('/societies/{society}', [StudentSocietyController::class, 'show'])->name('societies.show');
+     // Election Routes
+     Route::prefix('elections')->name('elections.')->group(function () {
+          Route::get('/societies', [StudentElectionController::class, 'index'])
+               ->name('societies.index');
+          Route::get('/societies/{society}/elections', [StudentElectionController::class, 'showElections'])
+               ->name('societies.elections');
+          Route::get('/elections/{election}/vote', [StudentElectionController::class, 'showVoteForm'])
+               ->name('vote');
+          Route::post('/elections/{election}/vote', [StudentElectionController::class, 'submitVote'])
+               ->name('vote.submit');
+          Route::get('/elections/{election}/apply', [StudentElectionController::class, 'showApplicationForm'])
+               ->name('apply');
+          Route::post('/elections/{election}/apply', [StudentElectionController::class, 'submitApplication'])
+               ->name('apply.submit');
+     });
 });
-
-// Student Election Routes
-Route::get('/societies', [StudentElectionController::class, 'index'])->name('societies.index02');

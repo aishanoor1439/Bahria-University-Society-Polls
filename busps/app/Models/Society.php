@@ -9,6 +9,7 @@ class Society extends Model
 {
     use HasFactory;
 
+    protected $table = 'societies';
     protected $primaryKey = 'society_id';
     public $incrementing = true;
 

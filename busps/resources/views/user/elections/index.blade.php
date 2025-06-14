@@ -1,64 +1,67 @@
-@extends('layouts.panel')
+@extends('layouts.user-panel')
 
-@section('title', 'Manage Elections')
+@section('title', 'Society Elections')
 
 @section('content')
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Registered Elections</h4>
-            <a href="{{ route('admin.elections.create') }}" class="btn btn-primary gradient-custom-2 w-100 fw-bold fa-md">
-                Add New Election
-            </a>
+            <div class="d-flex justify-content-between align-items-center">
+                <h4 class="title">
+                    <i class="fas fa-vote-yea me-2"></i>{{ $society->society_name }}
+                </h4>
+                <a href="{{ route('student.elections.societies.index') }}" class="btn btn-custom">
+                    <i class="fas fa-arrow-left me-1"></i> Back to Societies
+                </a>
+            </div>
         </div>
-        <div class="content table-responsive">
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Society</th>
-                        <th>Year</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach($elections as $election)
-                    <tr>
-                        <td>{{ $election->election_name }}</td>
-                        <td>{{ $election->society->society_name }}</td>
-                        <td>{{ $election->election_year }}</td>
-                        <td>{{ $election->start_date->format('d M Y') }}</td>
-                        <td>{{ $election->end_date->format('d M Y') }}</td>
-                        <td>
-                            <form action="{{ route('admin.elections.toggle-active', $election->election_id) }}" method="POST">
-                                @csrf
-                                <button type="submit" class="btn btn-sm btn-{{ $election->is_active ? 'success' : 'warning' }}">
-                                    {{ $election->is_active ? 'Active' : 'Inactive' }}
-                                </button>
-                            </form>
-                        </td>
-                        <td>
-                            <a href="{{ route('admin.elections.candidates.index', $election->election_id) }}" class="btn btn-manage">
-                                <i class="fas fa-users"></i> Manage candidates
-                            </a>
-                            <a href="{{ route('admin.elections.edit', $election->election_id) }}" class="btn btn-xs btn-warning">
-                                <i class="fa fa-pencil"></i>
-                            </a>
-                            <form action="{{ route('admin.elections.destroy', $election->election_id) }}" method="POST" style="display:inline">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this election?')">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
-                    @endforeach
-                </tbody>
-            </table>
+
+        <div class="content">
+            @if(session('success'))
+            <div class="alert alert-success">
+                <i class="fas fa-check-circle me-2"></i>{{ session('success') }}
+            </div>
+            @endif
+
+            @if(session('error'))
+            <div class="alert alert-danger">
+                <i class="fas fa-exclamation-circle me-2"></i>{{ session('error') }}
+            </div>
+            @endif
+
+            @if($elections->count() > 0)
+                @foreach($elections as $election)
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div>
+                                <h5 class="card-title">{{ $election->election_name }}</h5>
+                                <p class="card-text text-muted">
+                                    <i class="fas fa-calendar-alt me-2"></i>
+                                    {{ \Carbon\Carbon::parse($election->start_date)->format('M d, Y H:i') }} to
+                                    {{ \Carbon\Carbon::parse($election->end_date)->format('M d, Y H:i') }}
+                                </p>
+                                <p class="small">
+                                    Status: {{ $election->is_active ? 'Active' : 'Inactive' }}
+                                </p>
+                            </div>
+                            <div class="btn-group">
+                                <a href="{{ route('student.elections.vote', ['election' => $election->election_id]) }}" class="btn btn-manage">
+                                    <i class="fas fa-hand-paper me-1"></i> Vote
+                                </a>
+                                <a href="{{ route('student.elections.apply', ['election' => $election->election_id]) }}" class="btn btn-manage">
+                                    <i class="fas fa-user-tie me-1"></i> Apply
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            @else
+                <div class="alert alert-info">
+                    <i class="fas fa-info-circle me-2"></i> No elections found for this society at the moment.
+                </div>
+            @endif
         </div>
     </div>
 </div>

@@ -280,7 +280,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('societies.index02') }}">
+                        <a href="{{ route('student.elections.societies.index') }}">
                             <i class="ti-calendar" style="color: var(--primary-light);"></i>
                             <p>Elections</p>
                         </a>

@@ -36,4 +36,24 @@ class Student extends Authenticatable
     {
         return $this->hasMany(Candidate::class, 'student_id', 'student_id');
     }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'voter_id');
+    }
+
+    public function candidacies()
+    {
+        return $this->hasMany(Candidate::class, 'student_id');
+    }
+
+    public function isCandidateInElection($electionId)
+    {
+        return $this->candidacies()->where('election_id', $electionId)->exists();
+    }
+
+    public function hasVotedInElection($electionId)
+    {
+        return $this->votes()->where('election_id', $electionId)->exists();
+    }
 }

@@ -7,11 +7,6 @@
     <div class="card">
         <div class="header">
             <h4 class="title">{{ $election->election_name }}</h4>
-            <div class="pull-right">
-                <a href="{{ route('admin.elections.index') }}" class="btn btn-custom">
-                    <i class="fas fa-arrow-left"></i> Back to List
-                </a>
-            </div>
         </div>
         <div class="content">
             <form method="POST" action="{{ route('admin.elections.update', $election->election_id) }}">
@@ -62,6 +57,7 @@
                 <button type="submit" class="btn btn-primary gradient-custom-2 w-100 fw-bold fa-md">
                     Update Election
                 </button>
+                <a href="{{ route('admin.elections.index') }}" class="btn btn-custom">Cancel</a>
             </form>
         </div>
     </div>

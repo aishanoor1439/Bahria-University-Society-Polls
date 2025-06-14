@@ -31,7 +31,7 @@
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
                             <h5 class="card-title">
-                                <a href="{{ route('student.societies.show', $society) }}" class="text-primary">
+                                <a href="{{ route('student.elections.societies.elections', $society) }}" class="text-primary">
                                     {{ $society->society_name }}
                                 </a>
                             </h5>

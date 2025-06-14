@@ -45,4 +45,21 @@ class Election extends Model
     {
         return $this->hasMany(Candidate::class, 'election_id', 'election_id');
     }
+
+    public function votes()
+    {
+        return $this->hasMany(Vote::class, 'election_id');
+    }
+
+    public function applications()
+    {
+        return $this->hasMany(Application::class, 'election_id');
+    }
+
+    public function isActive()
+    {
+        return $this->is_active && 
+               now() >= $this->start_date && 
+               now() <= $this->end_date;
+    }
 }
