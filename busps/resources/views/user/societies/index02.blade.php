@@ -1,6 +1,6 @@
 @extends('layouts.user-panel')
 
-@section('title', 'My Societies')
+@section('title', 'My Elections')
 
 @section('content')
 <div class="col-md-12">
@@ -8,7 +8,7 @@
         <div class="header">
             <div class="d-flex justify-content-between align-items-center">
                 <h4 class="title">
-                    <i class="fas fa-user-friends me-2"></i>You are a member of
+                    <i class="fas fa-user-friends me-2"></i>You can participate in
                 </h4>
                 @if(!$societies->isEmpty())
                 <span class="badge bg-primary">

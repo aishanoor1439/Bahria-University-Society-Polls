@@ -10,7 +10,7 @@
                 <h4 class="title">
                     {{ $society->society_name }}
                 </h4>
-                <p class="card-text">{{ $society->description }}</p>
+                <p class="text-muted">{{ $society->description }}</p>
                 <div class="pull-right">
                     <a href="{{ route('student.societies.index') }}" class="btn btn-custom">
                         <i class="fas fa-arrow-left me-1"></i> Back to Societies

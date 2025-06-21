@@ -88,7 +88,7 @@ class StudentElectionController extends Controller
             'candidate_id' => $candidateId,
         ]);
 
-        return redirect()->route('student.election.societies.elections', $election->society_id)
+        return redirect()->route('student.elections.societies.elections', $election->society_id)
             ->with('success', 'Your vote has been submitted successfully!');
     }
 
@@ -137,10 +137,8 @@ class StudentElectionController extends Controller
             ->with('success', 'Your application has been submitted for review!');
     }
 
-    // Helper methods
     private function canVote($studentId, $electionId)
     {
-        // Check if already voted
         $alreadyVoted = Vote::where('voter_id', $studentId)
             ->where('election_id', $electionId)
             ->exists();
@@ -149,7 +147,6 @@ class StudentElectionController extends Controller
             return ['can_vote' => false, 'message' => 'You have already voted in this election'];
         }
 
-        // Check if is candidate
         $isCandidate = Candidate::where('student_id', $studentId)
             ->where('election_id', $electionId)
             ->exists();
@@ -163,7 +160,6 @@ class StudentElectionController extends Controller
 
     private function canApply($studentId, $electionId)
     {
-        // Check if already a candidate
         $isCandidate = Candidate::where('student_id', $studentId)
             ->where('election_id', $electionId)
             ->exists();
@@ -172,7 +168,6 @@ class StudentElectionController extends Controller
             return ['can_apply' => false, 'message' => 'You are already a candidate in this election'];
         }
 
-        // Check if already applied
         $hasPendingApplication = Application::where('student_id', $studentId)
             ->where('election_id', $electionId)
             ->where('status', 'pending')
@@ -183,5 +178,19 @@ class StudentElectionController extends Controller
         }
 
         return ['can_apply' => true, 'message' => ''];
+    }
+
+    public function showResults(Election $election)
+    {
+        $candidates = Candidate::where('election_id', $election->election_id)
+            ->with(['student', 'votes'])
+            ->get()
+            ->map(function ($candidate) {
+                $candidate->vote_count = $candidate->votes->count();
+                return $candidate;
+            })
+            ->sortByDesc('vote_count');
+
+        return view('user.elections.results', compact('election', 'candidates'));
     }
 }

@@ -138,5 +138,7 @@ Route::prefix('student')->name('student.')->group(function () {
                ->name('apply');
           Route::post('/elections/{election}/apply', [StudentElectionController::class, 'submitApplication'])
                ->name('apply.submit');
+          Route::get('/elections/{election}/results', [StudentElectionController::class, 'showResults'])
+               ->name('results');
      });
 });

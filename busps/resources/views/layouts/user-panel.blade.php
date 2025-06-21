@@ -117,7 +117,12 @@
             background: white;
         }
 
-        .card .header h4.title {
+        .card .header h4.title{
+            color: var(--primary-dark);
+            font-weight: 600;
+        }
+
+        .card .header .text-center h4.title{
             color: var(--primary-dark);
             font-weight: 600;
         }
@@ -237,6 +242,10 @@
 
         .footer.ul.li :hover {
             color: var(--primary-dark);
+        }
+
+        .text-muted{
+            color: var(--sidebar-link);
         }
 
         @media (max-width: 992px) {

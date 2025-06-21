@@ -31,12 +31,12 @@
                     <div class="d-flex justify-content-between align-items-start">
                         <div>
                             <h5 class="card-title">
-                                <a href="{{ route('student.societies.show', $society) }}" class="text-primary">
+                                <a href="{{ route('student.societies.show', $society) }}">
                                     {{ $society->society_name }}
                                 </a>
                             </h5>
                             <p class="card-text text-muted">
-                                <i class="fas fa-align-left me-2"></i>{{ Str::limit($society->description, 150) }}
+                                <i class="fas fa-align-left me-2"></i>{{ Str::limit($society->description, 25) }}
                             </p>
                         </div>
                         <span class="badge bg-secondary">
