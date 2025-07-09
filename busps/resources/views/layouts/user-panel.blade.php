@@ -117,12 +117,12 @@
             background: white;
         }
 
-        .card .header h4.title{
+        .card .header h4.title {
             color: var(--primary-dark);
             font-weight: 600;
         }
 
-        .card .header .text-center h4.title{
+        .card .header .text-center h4.title {
             color: var(--primary-dark);
             font-weight: 600;
         }
@@ -231,7 +231,7 @@
             padding: 0;
         }
 
-        .badge{
+        .badge {
             background-color: var(--primary-light);
         }
 
@@ -244,7 +244,7 @@
             color: var(--primary-dark);
         }
 
-        .text-muted{
+        .text-muted {
             color: var(--sidebar-link);
         }
 
@@ -404,6 +404,8 @@
             });
         });
     </script>
+    <script src="https://cdn.botpress.cloud/webchat/v3.1/inject.js" defer></script>
+    <script src="https://files.bpcontent.cloud/2025/07/09/09/20250709095445-8LFA03QU.js" defer></script>
 
     @yield('scripts')
 </body>
