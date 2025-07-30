@@ -13,22 +13,20 @@
         </div>
 
         <div class="content table-responsive">
-
             <h5 class="mb-3 mt-4">Pending Applications</h5>
             <table class="table">
                 <thead class="bg-light">
                     <tr>
                         <th>Student</th>
-                        <th>Position</th>
                         <th>Status</th>
                         <th>Actions</th>
+                        <th>AI Suggestion</th> <!-- Added column -->
                     </tr>
                 </thead>
                 <tbody>
                     @forelse($applications->where('status', 'pending') as $application)
                     <tr>
                         <td>{{ $application->student->name }}</td>
-                        <td>{{ $application->student->current_position ?? 'No Position' }}</td>
                         <td>Pending</td>
                         <td>
                             <form action="{{ route('admin.elections.candidates.approve', [$election->election_id, $application->application_id]) }}" method="POST" class="d-inline-block">
@@ -44,10 +42,20 @@
                                 </button>
                             </form>
                         </td>
+                        <td>
+                            <button onclick="getAIRecommendation(
+                                '{{ addslashes($application->student->name) }}', 
+                                '{{ addslashes($application->student->current_position ?? 'No Position') }}', 
+                                '{{ addslashes($election->election_name) }}'
+                            )" class="btn btn-sm btn-info">
+                                <i class="fas fa-robot"></i> Get AI Suggestion
+                            </button>
+                            <div class="ai-recommendation mt-2"></div>
+                        </td>
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="4" class="text-center text-muted">No pending applications.</td>
+                        <td colspan="5" class="text-center text-muted">No pending applications.</td> <!-- Updated colspan -->
                     </tr>
                     @endforelse
                 </tbody>
@@ -58,7 +66,6 @@
                 <thead class="bg-light">
                     <tr>
                         <th>Student</th>
-                        <th>Position</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -67,7 +74,6 @@
                     @forelse($election->candidates as $candidate)
                     <tr>
                         <td>{{ $candidate->student->name }}</td>
-                        <td>{{ $candidate->student->current_position ?? 'No Position' }}</td>
                         <td>Approved</td>
                         <td>
                             <form action="{{ route('admin.elections.candidates.remove', [$election->election_id, $candidate->candidate_id]) }}" method="POST" class="d-inline">
@@ -91,7 +97,6 @@
                 <thead class="bg-light">
                     <tr>
                         <th>Student</th>
-                        <th>Position</th>
                         <th>Status</th>
                         <th>Actions</th>
                     </tr>
@@ -100,7 +105,6 @@
                     @forelse($applications->where('status', 'rejected') as $application)
                     <tr class="text-muted">
                         <td>{{ $application->student->name }}</td>
-                        <td>{{ $application->student->current_position ?? 'No Position' }}</td>
                         <td>Rejected</td>
                         <td>
                             <form action="{{ route('admin.elections.candidates.reconsider', [$election->election_id, $application->application_id]) }}" method="POST" class="d-inline">
@@ -121,4 +125,61 @@
         </div>
     </div>
 </div>
+@endsection
+@section('scripts')
+<script>
+    async function getAIRecommendation(studentName, currentPosition, electionName) {
+        const btn = event.target;
+        const recommendationBox = btn.closest('td').querySelector('.ai-recommendation');
+
+        try {
+            // Show loading state
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing';
+            recommendationBox.innerHTML = '<div class="text-muted">Processing...</div>';
+
+            // Get CSRF token safely
+            const csrfToken = document.querySelector('meta[name="csrf-token"]')?.content || '';
+
+            const response = await fetch('/api/ai-recommend', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': csrfToken
+                },
+                body: JSON.stringify({
+                    student_name: studentName,
+                    current_position: currentPosition,
+                    election_name: electionName
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error(`API request failed with status ${response.status}`);
+            }
+
+            const data = await response.json();
+
+            recommendationBox.innerHTML = `
+            <div class="alert alert-${data.recommendation === 'approve' ? 'success' : 'danger'} p-2">
+                <strong>${data.recommendation.toUpperCase()}</strong> 
+                (${Math.round(data.confidence)}% confidence)
+                <br><small>${data.reason}</small>
+            </div>
+        `;
+        } catch (error) {
+            console.error('Recommendation error:', error);
+            recommendationBox.innerHTML = `
+            <div class="alert alert-warning p-2">
+                <i class="fas fa-exclamation-triangle"></i> 
+                ${error.message || 'Failed to load recommendation'}
+            </div>
+        `;
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-robot"></i> Get AI Suggestion';
+        }
+    }
+</script>
 @endsection

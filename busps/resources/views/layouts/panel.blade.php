@@ -10,6 +10,7 @@
     <title>@yield('title') | BUSPs</title>
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
     <meta name="viewport" content="width=device-width" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet" />
     <link href="{{ asset('assets/css/paper-dashboard.css')}}" rel="stylesheet" />
     <link href="{{ asset('assets/css/demo.css')}}" rel="stylesheet" />
