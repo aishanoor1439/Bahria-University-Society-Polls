@@ -1,0 +1,43 @@
+How do I join a society?
+Attend the open house event to join societies you're interested in;
+society members are chosen through interviews with the society's HR.
+
+What do the number tags below each society represent?
+The blue number tags below each society indicate the number of
+members. Click the society's name to view a list of all members.
+
+How are members selected for a society's hierarchy?
+Hierarchy members are elected based on the number of votes they
+receive from society members. Candidates run for specific positions,
+and the candidate with the most votes wins.
+
+Who is eligible to participate in the elections?
+Every society member is eligible to participate in the elections both as
+a candidate and as a voter.
+
+Can anyone stand for any position as a candidate?
+Yes, members can apply for any position, but the admin approves
+applications according to the "Polls Rule" book.
+
+How to vote?
+Navigate to the elections page through the sidebar. Access the
+elections by clicking on the particular society, and you'll find the "Vote"
+option below each election. Select your candidate and click "Submit Vote".
+
+How do I apply as a candidate for a particular election?
+Navigate to the elections page through the sidebar. Access the
+elections by clicking on the particular society, and you'll find the "Apply"
+option below each election. Type your Manifesto and click "Submit Application". Wait for the application to get approved by the admin.
+
+My application has been submitted, but my name isn't on the candidate list. Why?
+Your name will be on the candidate's list as soon as your application
+gets approved by the admin.
+
+What is a manifesto?
+"A manifesto is a public declaration outlining the intentions, motives, or
+views of an individual, group, or organization. It serves as a statement
+of purpose, often used to rally support or communicate a specific
+
+Is the result calculation automated?
+Yes, the system automatically calculates the results and determines
+the winner according to the number of votes given by the society members.
