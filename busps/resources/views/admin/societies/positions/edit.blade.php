@@ -6,7 +6,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">{{ $position->position_name }}</h4>
+            <h5 class="card-title mb-0 d-flex align-items-center">{{ $position->position_name }}</h5>
             <div class="pull-right">
                 <a href="{{ route('societies.show', $society->society_id) }}" class="btn btn-custom">
                     <i class="fas fa-arrow-left"></i> Back to Society

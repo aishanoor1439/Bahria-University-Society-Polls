@@ -13,7 +13,7 @@
             </div>
             <div class="text-center mb-4">
                 <h3 class="title">{{ $election->election_name }}</h3>
-                <h4 class="title">{{ $election->society->society_name }}</h4>
+                <h5 class="card-title mb-0 d-flex align-items-center">{{ $election->society->society_name }}</h5>
                 <p>
                 <div class="text-muted">
                     <i class="fas fa-calendar-alt me-2 text-muted"></i>

@@ -6,7 +6,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">{{ $society->society_name }}</h4>
+            <h5 class="card-title mb-0 d-flex align-items-center">{{ $society->society_name }}</h5>
             <div class="pull-right">
                 <a href="{{ route('societies.members.index', $society->society_id) }}" class="btn btn-manage">
                     <i class="fas fa-users"></i> Manage Members
@@ -21,7 +21,6 @@
                 <div class="col-md-8">
                     <div class="society-details">
                         <div class="form-group">
-                            <label>Description:</label>
                             <p class="description-box">{{ $society->description ?? 'No description available' }}</p>
                         </div>
                     </div>

@@ -6,7 +6,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">{{ $election->election_name }}</h4>
+            <h5 class="card-title mb-0 d-flex align-items-center">{{ $election->election_name }}</h5>
             <a href="{{ route('admin.elections.index') }}" class="btn btn-custom">
                 <i class="fas fa-arrow-left"></i> Back to Elections
             </a>

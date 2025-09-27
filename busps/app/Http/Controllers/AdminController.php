@@ -6,6 +6,13 @@ use Illuminate\Http\Request;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Student;
+use App\Models\Society;
+use App\Models\Election;
+use App\Models\Application;
+use App\Models\Candidate;
+use App\Models\Vote;
+
 
 class AdminController extends Controller
 {
@@ -59,6 +66,19 @@ class AdminController extends Controller
         return redirect()->route('admin.dashboard');
     }
 
+    // public function showDashboard()
+    // {
+    //     $LoggedAdminInfo = Admin::find(session('LoggedAdminInfo'));
+
+    //     if (!$LoggedAdminInfo) {
+    //         return redirect()->route('admin.login')->with('fail', 'You must be logged in to access the dashboard.');
+    //     }
+
+    //     return view('admin.dashboard', [
+    //         'LoggedAdminInfo' => $LoggedAdminInfo,
+    //     ]);
+    // }
+
     public function showDashboard()
     {
         $LoggedAdminInfo = Admin::find(session('LoggedAdminInfo'));
@@ -67,21 +87,57 @@ class AdminController extends Controller
             return redirect()->route('admin.login')->with('fail', 'You must be logged in to access the dashboard.');
         }
 
-        return view('admin.dashboard', [
-            'LoggedAdminInfo' => $LoggedAdminInfo,
-        ]);
+        // Stats
+        $totalStudents = Student::count();
+        $totalSocieties = Society::count();
+        $totalElections = Election::count();
+        $totalApplications = Application::count();
+        $totalCandidates = Candidate::count();
+        $totalVotes = Vote::count();
+
+        // Applications breakdown
+        $applicationStats = [
+            'pending' => Application::pending()->count(),
+            'approved' => Application::approved()->count(),
+            'rejected' => Application::rejected()->count(),
+        ];
+
+        // Votes per candidate
+        $votesPerCandidate = Candidate::with('student')->withCount('votes')->get();
+
+        // Active elections per society
+        $activeElectionsPerSociety = Society::withCount(['elections as active_elections_count' => function ($query) {
+            $query->active();
+        }])->get();
+
+        // Recent Applications
+        $recentApplications = Application::with(['student', 'election'])->latest()->take(5)->get();
+
+        return view('admin.dashboard', compact(
+            'LoggedAdminInfo',
+            'totalStudents',
+            'totalSocieties',
+            'totalElections',
+            'totalApplications',
+            'totalCandidates',
+            'totalVotes',
+            'applicationStats',
+            'votesPerCandidate',
+            'activeElectionsPerSociety',
+            'recentApplications'
+        ));
     }
 
     public function logout(Request $request)
     {
-        Auth::guard('admin')->logout(); 
+        Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
         return redirect('/admin/login');
     }
 
-    
+
     public function showSocieties()
     {
         return view('admin.societies');

@@ -6,7 +6,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Registered Societies</h4>
+            <h5 class="card-title mb-0 d-flex align-items-center">Registered Societies</h5>
             <p class="category">Manage all societies</p>
         </div>
         @if($societies->isEmpty())
@@ -14,7 +14,7 @@
             <i class="fas fa-info-circle"></i> No societies have been added yet.
         </div>
         @else
-        <div class="content table-responsive table-full-width">
+        <div class="content table-responsive">
             <table class="table table-striped">
                 <thead>
                     <th>Name</th>

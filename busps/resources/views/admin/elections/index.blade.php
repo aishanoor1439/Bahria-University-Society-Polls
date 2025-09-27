@@ -6,7 +6,8 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Schedualed Elections</h4>
+            <h5 class="card-title mb-0 d-flex align-items-center">Schedualed Elections</h5>
+            <p class="category">Manage all elections</p>
         </div>
         @if($elections->isEmpty())
         <div class="alert alert-danger">

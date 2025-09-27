@@ -7,7 +7,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">Societies List</h4>
+            <h5 class="card-title mb-0 d-flex align-items-center">Societies List</h5>
             <p class="category">Manage all registered societies</p>
             <a href="{{ route('societies.create') }}" class="btn btn-info btn-fill pull-right">Add New Society</a>
         </div>

@@ -5,7 +5,7 @@
 @section('content')
 <div class="card">
     <div class="card-header">
-        <h4>{{ $society->society_name }}</h4>
+        <h5 class="card-title mb-0 d-flex align-items-center">{{ $society->society_name }}</h5>
         <a href="{{ route('societies.show', $society->society_id) }}" class="btn btn-custom">
             <i class="fas fa-arrow-left"></i> Back to Society
         </a>

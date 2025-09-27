@@ -7,7 +7,7 @@
     <div class="card">
         <div class="header">
             <div class="d-flex justify-content-between align-items-center">
-                <h4 class="title">
+                <h5 class="card-title mb-0 d-flex align-items-center">
                     {{ $society->society_name }}
                 </h4>
                 <p class="text-muted">{{ $society->description }}</p>
@@ -28,7 +28,6 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <div class="card">
                         <div class="header">
                             <h4 class="title">
                                 <i class="fas fa-id-card me-2"></i>Members
@@ -40,8 +39,8 @@
                                 <i class="fas fa-info-circle me-2"></i> No members found
                             </div>
                             @else
-                            <div class="table-responsive">
-                                <table class="table">
+                            <div class="table table-responsive">
+                                <table class="table table-striped">
                                     <thead class="text-primary">
                                         <tr>
                                             <th><i class="fas fa-user me-1"></i> Name</th>

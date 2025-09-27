@@ -7,9 +7,9 @@
     <div class="card">
         <div class="header">
             <div class="d-flex justify-content-between align-items-center">
-                <h4 class="title">
+                <h5 class="card-title mb-0 d-flex align-items-center">
                     <i class="fas fa-user-tie me-2"></i>{{ $election->election_name }}
-                </h4>
+                </h5>
                     <a href="{{ route('student.elections.societies.elections', $election->society_id) }}" class="btn btn-custom">
                         <i class="fas fa-arrow-left me-1"></i> Back to Elections
                     </a>

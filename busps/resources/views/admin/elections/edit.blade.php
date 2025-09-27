@@ -6,7 +6,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">{{ $election->election_name }}</h4>
+            <h5 class="card-title mb-0 d-flex align-items-center">{{ $election->election_name }}</h5>
         </div>
         <div class="content">
             <form method="POST" action="{{ route('admin.elections.update', $election->election_id) }}">

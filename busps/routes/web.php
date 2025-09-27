@@ -17,14 +17,10 @@ use App\Http\Controllers\StudentElectionController;
 use Illuminate\Support\Facades\DB;
 use App\Models\Election;
 
-// Testing routes
-Route::get('/admin/admin-reset', function () {
-     return view('admin/admin-reset');
-});
-Route::get('/admin/panel', function () {
-     return view('layouts/panel');
-});
-
+// Welcome route
+Route::get('/', function () {
+     return view('welcome');
+})->name('welcome');
 
 // Authentication routes for admin
 Route::get('admin/register', [AdminController::class, 'showRegister'])->name('admin.register');
@@ -101,7 +97,7 @@ Route::post('/user/login', [UserController::class, 'login'])->name('user.login.s
 
 Route::get('/user/dashboard', [UserController::class, 'showDashboard'])->name('user.dashboard');
 
-// Logout route for admin
+// Logout route for student
 Route::post('/user/logout', [UserController::class, 'logout'])
      ->name('user.logout');
 
@@ -124,6 +120,7 @@ Route::prefix('student')->group(function () {
 Route::prefix('student')->name('student.')->group(function () {
      Route::get('/societies', [StudentSocietyController::class, 'index'])->name('societies.index');
      Route::get('/societies/{society}', [StudentSocietyController::class, 'show'])->name('societies.show');
+     
      // Election Routes
      Route::prefix('elections')->name('elections.')->group(function () {
           Route::get('/societies', [StudentElectionController::class, 'index'])

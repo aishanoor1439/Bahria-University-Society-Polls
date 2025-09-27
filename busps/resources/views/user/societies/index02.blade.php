@@ -7,9 +7,9 @@
     <div class="card">
         <div class="header">
             <div class="d-flex justify-content-between align-items-center">
-                <h4 class="title">
+                <h5 class="card-title mb-0 d-flex align-items-center">
                     <i class="fas fa-user-friends me-2"></i>You can participate in
-                </h4>
+                </h5>
                 @if(!$societies->isEmpty())
                 <span class="badge bg-primary">
                     {{ $societies->count() }} societies

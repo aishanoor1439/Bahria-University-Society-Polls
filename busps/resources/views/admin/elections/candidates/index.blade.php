@@ -6,7 +6,7 @@
 <div class="col-md-12">
     <div class="card">
         <div class="header">
-            <h4 class="title">{{ $election->election_name }}</h4>
+            <h5 class="card-title mb-0 d-flex align-items-center">{{ $election->election_name }}</h5>
             <a href="{{ route('admin.elections.index') }}" class="btn btn-custom">
                 <i class="fas fa-arrow-left"></i> Back to Elections
             </a>
@@ -14,13 +14,13 @@
 
         <div class="content table-responsive">
             <h5 class="mb-3 mt-4">Pending Applications</h5>
-            <table class="table">
+            <table class="table table-striped">
                 <thead class="bg-light">
                     <tr>
                         <th>Student</th>
                         <th>Status</th>
                         <th>Actions</th>
-                        <th>AI Suggestion</th> <!-- Added column -->
+                        <th>AI Suggestion</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,7 +62,7 @@
             </table>
 
             <h5 class="mb-3">Approved Candidates</h5>
-            <table class="table">
+            <table class="table table-striped">
                 <thead class="bg-light">
                     <tr>
                         <th>Student</th>
@@ -93,7 +93,7 @@
             </table>
 
             <h5 class="mb-3 mt-4">Rejected Applications</h5>
-            <table class="table">
+            <table class="table table-striped">
                 <thead class="bg-light">
                     <tr>
                         <th>Student</th>
